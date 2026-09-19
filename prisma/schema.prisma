@@ -8,6 +8,27 @@ datasource db {
 }
 
 
+enum LeadStatus{
+  NEW
+  CONTACTED
+  QUALIFIED
+  WON
+  LOST
+}
+enum QuotationStatus{
+  DRAFT
+  SENT
+  ACCEPTED
+  REJECTED
+  EXPIRED
+}
+enum InstallationJobStatus{
+  PENDING
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
 
 
 model Customers {
@@ -24,7 +45,7 @@ model Customers {
 model Leads {
   id           Int      @id @default(autoincrement())
   customerId   Int
-  status       String
+  status       LeadStatus
   estimatedBill Int
   createdAt    DateTime @default(now())
 
@@ -55,7 +76,7 @@ model Quotations {
   id         Int      @id @default(autoincrement())
   leadId     Int      @unique
   totalPrice Int
-  status     String
+  status     QuotationStatus
   createdAt  DateTime @default(now())
 
   lead       Leads    @relation(fields: [leadId], references: [id])
@@ -66,7 +87,7 @@ model InstallationJobs {
   id            Int      @id @default(autoincrement())
   quotationId   Int      @unique
   scheduledDate String
-  status        String
+  status        InstallationJobStatus
   createdAt     DateTime @default(now())
 
   quotation     Quotations @relation(fields: [quotationId], references: [id])
