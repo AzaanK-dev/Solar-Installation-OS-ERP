@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export async function GET() {
     try {
         const customers = await prisma.customers.findMany();
-        if (!customers) {
+        if (customers.length===0) {
             return NextResponse.json({ error: "No customers found" }, { status: 404 });
         }
 
@@ -35,7 +35,6 @@ export async function POST(request: Request) {
                 address
             }
         })
-        if (!customer) return NextResponse.json({ error: "Failed to create customer" }, { status: 500 });
         return NextResponse.json({ message: "Customer created successfully", customer }, { status: 201 });
         
     } catch (error) {
