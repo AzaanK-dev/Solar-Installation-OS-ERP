@@ -70,6 +70,8 @@ model Equipment {
   quantity  Int
   unitPrice Int
   createdAt DateTime @default(now())
+
+  quotationItem    QuotationItem[]
 }
 
 model Quotations {
@@ -81,6 +83,19 @@ model Quotations {
 
   lead       Leads    @relation(fields: [leadId], references: [id])
   job        InstallationJobs?
+  quotationItem    QuotationItem[]
+}
+
+model QuotationItem {
+  id           Int      @id @default(autoincrement())
+  quotationId  Int
+  equipmentId  Int
+  quantity     Int
+  unitPrice    Int
+  subtotal     Int
+
+  quotation   Quotations  @relation(fields: [quotationId], references: [id], onDelete: Cascade)
+  equipment   Equipment   @relation(fields: [equipmentId], references: [id])
 }
 
 model InstallationJobs {
