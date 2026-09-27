@@ -142,8 +142,6 @@ export async function PATCH(
 }
 
 
-
-
 export async function DELETE(
     request: Request,
     { params }: { params: Promise<{ id: string; itemId: string }> }
@@ -181,9 +179,3 @@ export async function DELETE(
         return NextResponse.json({ error: "Failed to update quotation item" }, { status: 500 });
     }
 }
-
-
-
-
-
-
