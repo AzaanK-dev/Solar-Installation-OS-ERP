@@ -101,7 +101,7 @@ model QuotationItem {
 model InstallationJobs {
   id            Int      @id @default(autoincrement())
   quotationId   Int      @unique
-  scheduledDate String
+  scheduledDate DateTime
   status        InstallationJobStatus
   createdAt     DateTime @default(now())
 
