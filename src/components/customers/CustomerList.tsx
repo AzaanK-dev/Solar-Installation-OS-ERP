@@ -21,7 +21,7 @@ export default function CustomerList() {
             ["Name", (c) => <span className="font-medium">{c.name}</span>],
             ["Email", (c) => c.email], ["Contact", (c) => c.contact], ["Address", (c) => c.address],
             ["", (c) => <RowActions href={`/customers/${c.id}`} onEdit={() => setEdit(c)}
-              onDelete={() => confirmRun(`Delete ${c.name}?`, () => api.customers.remove(c.id), reload)} />],
+              onDelete={() => confirmRun(`Delete ${c.name}?`, () => api.customers.delete(c.id), reload)} />],
           ]} />
         )}
       </Async>

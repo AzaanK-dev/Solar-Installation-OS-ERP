@@ -19,9 +19,10 @@ export default function SurveyList() {
           <Table rows={rows} cols={[
             ["ID", (s) => `#${s.id}`],
             ["Lead", (s) => { const l = ls.find((x) => x.id === s.leadId); return l ? leadLabel(l, cs) : `Lead #${s.leadId}`; }],
-            ["Area", (s) => s.area], ["Created", (s) => fmtDate(s.createdAt)],
+            ["Area", (s) => s.area + " sq/ft"], 
+            ["Created", (s) => fmtDate(s.createdAt)],
             ["", (s) => <RowActions href={`/surveys/${s.id}`} onEdit={() => setEdit(s)}
-              onDelete={() => confirmRun(`Delete survey #${s.id}?`, () => api.surveys.remove(s.id), reload)} />],
+              onDelete={() => confirmRun(`Delete survey #${s.id}?`, () => api.surveys.delete(s.id), reload)} />],
           ]} />
         )}
       </Async>

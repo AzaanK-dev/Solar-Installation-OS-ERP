@@ -20,7 +20,7 @@ export default function LeadList() {
             ["ID", (l) => `#${l.id}`], ["Customer", (l) => nameOf(cs, l.customerId)],
             ["Est. bill", (l) => money(l.estimatedBill)], ["Status", (l) => <Badge s={l.status} />], ["Created", (l) => fmtDate(l.createdAt)],
             ["", (l) => <RowActions href={`/leads/${l.id}`} onEdit={() => setEdit(l)}
-              onDelete={() => confirmRun(`Delete lead #${l.id}?`, () => api.leads.remove(l.id), reload)} />],
+              onDelete={() => confirmRun(`Delete lead #${l.id}?`, () => api.leads.delete(l.id), reload)} />],
           ]} />
         )}
       </Async>

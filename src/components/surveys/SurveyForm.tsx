@@ -5,8 +5,13 @@ import type { Customer, Lead, Survey } from "@/types";
 import { Field, FormModal, inputCls, leadLabel } from "@/components/layout/ui";
 
 export default function SurveyForm({ survey, leads, customers, onClose, onSaved }: {
-  survey: Survey | null; leads: Lead[]; customers: Customer[]; onClose: () => void; onSaved: () => void;
+  survey: Survey | null; 
+  leads: Lead[]; 
+  customers: Customer[]; 
+  onClose: () => void; 
+  onSaved: () => void;
 }) {
+
   const [leadId, setLeadId] = useState(String(survey?.leadId ?? ""));
   const [area, setArea] = useState(String(survey?.area ?? ""));
   return (
@@ -14,8 +19,13 @@ export default function SurveyForm({ survey, leads, customers, onClose, onSaved 
       if (!leadId) throw new Error("Select a lead.");
       const a = Number(area);
       if (area === "" || isNaN(a) || a <= 0) throw new Error("Enter a site area greater than 0.");
+      console.log("SURVEY FORM SUBMITTED", { leadId: Number(leadId), area: a });
+
       if (survey) await api.surveys.update(survey.id, { area: a });
       else await api.surveys.create({ leadId: Number(leadId), area: a });
+
+      console.log("SURVEY CREATED SUCCESSFULLY");
+
       onSaved();
     }}>
       <Field label="Lead">

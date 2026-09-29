@@ -57,7 +57,7 @@ model Leads {
 model SiteSurveys {
   id        Int      @id @default(autoincrement())
   leadId    Int      @unique
-  area      String
+  area      Float
   createdAt DateTime @default(now())
 
   lead      Leads    @relation(fields: [leadId], references: [id])

@@ -20,7 +20,7 @@ export default function SurveyDetail({ id }: { id: number }) {
         return (
           <>
             <Detail title={`Survey #${sv.id}`} back="/surveys" onEdit={() => setEdit(true)}
-              onDelete={() => confirmRun(`Delete survey #${id}?`, () => api.surveys.remove(id), () => router.push("/surveys"))}
+              onDelete={() => confirmRun(`Delete survey #${id}?`, () => api.surveys.delete(id), () => router.push("/surveys"))}
               items={[
                 ["Lead", <Link key="l" href={`/leads/${sv.leadId}`} className="text-teal-700 hover:underline">{l ? leadLabel(l, cs) : `Lead #${sv.leadId}`}</Link>],
                 ["Site area", sv.area], ["Created", fmtDate(sv.createdAt)],

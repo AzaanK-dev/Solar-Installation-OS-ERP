@@ -8,13 +8,16 @@ export default function LeadForm({ lead, customers, onClose, onSaved }: { lead: 
   const [customerId, setCustomerId] = useState(String(lead?.customerId ?? ""));
   const [bill, setBill] = useState(String(lead?.estimatedBill ?? ""));
   const [status, setStatus] = useState<LeadStatus>(lead?.status ?? "NEW");
+
   return (
     <FormModal title={lead ? "Edit lead" : "New lead"} onClose={onClose} onSubmit={async () => {
       if (!customerId) throw new Error("Select a customer.");
       const estimatedBill = Number(bill);
       if (bill === "" || isNaN(estimatedBill) || estimatedBill < 0) throw new Error("Enter a valid estimated bill.");
+      
       if (lead) await api.leads.update(lead.id, { customerId: Number(customerId), estimatedBill, status });
-      else await api.leads.create({ customerId: Number(customerId), estimatedBill });
+      else await api.leads.create({ customerId: Number(customerId), estimatedBill, status });
+      
       onSaved();
     }}>
       <Field label="Customer">
