@@ -14,7 +14,7 @@ export default function JobStatusControl({ job, onChanged }: { job: Job; onChang
   return (
     <Btn disabled={busy} onClick={async () => {
       setBusy(true);
-      try { await api.jobs.setStatus(job.id, next); onChanged(); } catch (e) { alert((e as Error).message); }
+      try { await api.jobs.changeStatus(job.id, next); onChanged(); } catch (e) { alert((e as Error).message); }
       setBusy(false);
     }}>{LABEL[next]}</Btn>
   );

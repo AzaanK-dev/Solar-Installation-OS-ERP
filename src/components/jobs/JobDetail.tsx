@@ -15,7 +15,7 @@ export default function JobDetail({ id }: { id: number }) {
         const q = (quotes.data ?? []).find((x) => x.id === job.quotationId);
         return (
           <Detail title={`Job #${job.id}`} back="/jobs" actions={<JobStatusControl job={job} onChanged={j.reload} />}
-            onDelete={() => confirmRun(`Delete job #${id}?`, () => api.jobs.remove(id), () => router.push("/jobs"))}
+            onDelete={() => confirmRun(`Delete job #${id}?`, () => api.jobs.delete(id), () => router.push("/jobs"))}
             items={[
               ["Quotation", <Link key="q" href={`/quotations/${job.quotationId}`} className="text-teal-700 hover:underline">#{job.quotationId}{q ? ` — ${money(q.totalPrice)}` : ""}</Link>],
               ["Status", <Badge key="s" s={job.status} />], ["Scheduled date", fmtDate(job.scheduledDate)], ["Created", fmtDate(job.createdAt)],

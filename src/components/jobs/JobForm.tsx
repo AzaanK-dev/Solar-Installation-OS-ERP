@@ -8,12 +8,14 @@ export default function JobForm({ quotations, presetId, onClose, onSaved }: {
   quotations: Quotation[]; presetId?: number; onClose: () => void; onSaved: () => void;
 }) {
   const [quotationId, setQuotationId] = useState(String(presetId ?? ""));
+  const status = "SCHEDULED"
   const [scheduledDate, setDate] = useState("");
   return (
     <FormModal title="New installation job" onClose={onClose} onSubmit={async () => {
       if (!quotationId) throw new Error("Select an accepted quotation.");
       if (!scheduledDate) throw new Error("Choose a scheduled date.");
-      await api.jobs.create({ quotationId: Number(quotationId), scheduledDate });
+      
+      await api.jobs.create({ quotationId: Number(quotationId), status, scheduledDate });
       onSaved();
     }}>
       <Field label="Accepted quotation">

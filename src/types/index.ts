@@ -83,7 +83,8 @@ export interface Job {
     createdAt: string 
 }
 export interface JobInput { 
-    quotationId: number; 
+    quotationId: number;
+    status: JobStatus 
     scheduledDate: string 
 }
 

@@ -24,7 +24,7 @@ export default function JobList() {
             ["", (j) => (
               <div className="flex items-center justify-end gap-3">
                 <JobStatusControl job={j} onChanged={reload} />
-                <RowActions href={`/jobs/${j.id}`} onDelete={() => confirmRun(`Delete job #${j.id}?`, () => api.jobs.remove(j.id), reload)} />
+                <RowActions href={`/jobs/${j.id}`} onDelete={() => confirmRun(`Delete job #${j.id}?`, () => api.jobs.delete(j.id), reload)} />
               </div>)],
           ]} />
         )}
