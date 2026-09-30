@@ -68,7 +68,7 @@ export interface Quotation {
     totalPrice: number; 
     status: QuotationStatus; 
     createdAt: string; 
-    items?: QuotationItem[] 
+    quotationItem?: QuotationItem[] 
 }
 export interface QuotationCreateInput { 
     leadId: number; 

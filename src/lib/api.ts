@@ -212,10 +212,10 @@ export const api = {
     },
   },
 
-  equipments: {
+  equipment: {
     list: async (): Promise<Equipment[]> => {
-      const response = await request<{ equipments: Equipment[] }>("/api/equipment")
-      return response.equipments
+      const response = await request<{ equipment: Equipment[] }>("/api/equipment")
+      return response.equipment
     },
     get: async (id:number) => {
       const response = await request<{ equipment: Equipment }>(`/api/equipment/${id}`)

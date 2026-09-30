@@ -14,14 +14,27 @@ export default function EquipmentList() {
   const [edit, setEdit] = useState<Equipment | "new" | null>(null);
   return (
     <>
-      <PageHeader title="Equipment" action={<Btn onClick={() => setEdit("new")}>New equipment</Btn>} />
+      <PageHeader title="Equipment" action={
+        <Btn onClick={() => setEdit("new")}>
+          New equipment
+        </Btn>}
+      />
+
       <Async loading={loading} error={error} data={data} onRetry={reload} empty="No equipment yet. Add panels, inverters and batteries to quote with.">
+
         {(rows) => (
           <Table rows={rows} cols={[
-            ["Name", (e) => <span className="font-medium">{e.name}</span>], ["Type", (e) => e.type],
-            ["Stock", (e) => <StockCell qty={e.quantity} />], ["Unit price", (e) => money(e.unitPrice)],
-            ["", (e) => <RowActions href={`/equipment/${e.id}`} onEdit={() => setEdit(e)}
-              onDelete={() => confirmRun(`Delete ${e.name}?`, () => api.equipment.remove(e.id), reload)} />],
+            ["Name", (e) => <span className="font-medium">{e.name}</span>],
+            ["Type", (e) => e.type],
+            ["Stock", (e) => <StockCell qty={e.quantity} />],
+            ["Unit price", (e) => money(e.unitPrice)],
+            ["", (e) =>
+              <RowActions
+                href={`/equipment/${e.id}`}
+                onEdit={() => setEdit(e)}
+                onDelete={() => confirmRun(`Delete ${e.name}?`, () => api.equipment.delete(e.id), reload)}
+              />],
+
           ]} />
         )}
       </Async>
